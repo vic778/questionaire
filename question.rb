@@ -1,42 +1,38 @@
 class Question
-    attr_accessor :prompt, :answer
+    attr_accessor :prompt, :answer, :name
   
     def initialize(prompt, answer)
       @prompt = prompt
       @answer = answer
     end
-  end
-  
-  def run_test(questions)
-    answer = ""
+
+end
+
+
+def run_test(questions)
+
+    print "what's your name please: "
+    name = gets.chomp
     score = 0
+    right_answers = []
+  
     for question in questions
-      p question.prompt
-      answer = gets.chomp()
-      if answer == question.answer
-        score += 1
-      end
+        print "#{question.prompt}: "
+        answer = gets.chomp
+        while !question.prompt.include?(answer)
+          puts "please this answer is not included in the list of answers"
+          print "#{question.prompt}: "
+          answer = gets.chomp
+        end
+        score += 1 if answer == question.answer
+        right_answers << question.answer
     end
-    p "you got #{score} / #{questions.length}"
+  
+    if score < 2
+      puts "hey #{name} 😭 , you got #{score} / #{questions.length} ❌"
+      puts "here are the correct answers #{right_answers}"
+    else
+      puts "Congrats #{name} 🤣, you got #{score} / #{questions.length} ✅"
+    end
   end
   
-  q1 = "What color are apples (a)red (b)black  (c)orange"
-  q2 = "what color are bananas?\n(a)ping\n(b)red\n(c)yellow"
-  q3 = "Who's the creator of this algorith?\n(a)chrisian\n(b)victor\n(c)chanel"
-
-    questions = [
-        Question.new(q1, "a"),
-        Question.new(q2, "c"),
-        Question.new(q3, "b")
-    ]
-  
-run_test(questions)
-  
-
-# "What color are apples (a)red (b)black  (c)orange"
-# a
-# "what color are bananas?\n(a)ping\n(b)red\n(c)yellow"
-# c
-# "Who's the creator of this algorith?\n(a)chrisian\n(b)victor\n(c)chanel"
-# b
-# "you got 3 / 3"
