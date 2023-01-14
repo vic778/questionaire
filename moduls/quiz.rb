@@ -7,18 +7,18 @@ class Quiz
 end
 
 class TestRunner
-  def initialize(name)
+  def initialize(name, score)
     @name = name
+    @score = score
   end
 
   def run(questions)
-    p "Welcome to the quiz }"
-    score = 0
+    # score = 0
     right_answers = []
     user_desire = false
-    take_test(questions, score, right_answers)
-    check_for_changes(questions, score, right_answers)
-    display_results(questions, score, right_answers)
+    take_test(questions, @score, right_answers)
+    check_for_changes(questions, @score, right_answers)
+    display_results(questions, @score, right_answers)
   end
 
   def take_test(questions, score, right_answers)
@@ -31,8 +31,10 @@ class TestRunner
         answer = gets.chomp
       end
       score += 1 if answer == question.answer
+      p "here is the score #{score}"
       right_answers << question.answer
     end
+    # display_results(questions, score, right_answers)
   end
 
   def check_for_changes(questions, score, right_answers)
@@ -55,17 +57,19 @@ class TestRunner
         right_answers = []
         questions.each do |question|
           score += 1 if question.answer == question.answer
+          p "here is the score #{score}"
           right_answers << question.answer
         end
-    end
+      end
+      # display_results(questions, score, right_answers)
   end
 
   def display_results(questions, score, right_answers)
     if score < 2
-    puts "\033[31mhey #{@name} 😭 , you got #{score} / #{questions.length} ❌\033[0m"
+    puts "\033[31mhey #{@name} 😭 , you got #{@score} / #{questions.length} ❌\033[0m"
     puts "here are the correct answers #{right_answers}"
     else
-    puts "\033[32mCongrats #{@name} 🤣, you got #{score} / #{questions.length} ✅\033[0m"
+    puts "\033[32mCongrats #{@name} 🤣, you got #{@score} / #{questions.length} ✅\033[0m"
     end
   end
 end

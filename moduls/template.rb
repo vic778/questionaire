@@ -11,9 +11,10 @@ class Template < Quiz
       Quiz.new(q2, 'c'),
       Quiz.new(q3, 'b')
     ]
-    pp "what's your name please: "
+
+    pp " Welcome to the quiz, what's your name please: "
     name = gets.chomp
-    test_runner = TestRunner.new(name)
+    test_runner = TestRunner.new(name, 0)
     test_runner.run(questions)
     # run(questions)
   # end
